@@ -1,0 +1,32 @@
+version: '3'
+services:
+
+  flask:
+    image: webapp-flask
+    build:
+      context: flask
+      dockerfile: Dockerfile
+    depends_on:
+      - redis
+      - apipoller
+
+  redis:
+    image: redis:5.0-alpine
+
+  nginx:
+    image: webapp-nginx
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    ports:
+      - 5000:80
+    depends_on:
+      - flask
+
+  apipoller:
+    container_name: apipoller
+    build:
+      context: apipoller
+      dockerfile: Dockerfile
+    ports:
+      - 5500:5500

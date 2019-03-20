@@ -1,0 +1,4 @@
+Flask==1.0.2
+uWSGI==2.0.17.1
+flask-redis==0.3.0
+gevent==1.4.0
